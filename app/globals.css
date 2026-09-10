@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f7fb;
+  --foreground: #12141c;
+  --card: rgba(255, 255, 255, 0.72);
+  --card-border: rgba(17, 24, 39, 0.08);
+  --muted: #6b7280;
+  --field: rgba(255, 255, 255, 0.9);
+  --field-border: rgba(17, 24, 39, 0.12);
+  --glow-a: rgba(99, 102, 241, 0.35);
+  --glow-b: rgba(236, 72, 153, 0.28);
+  --glow-c: rgba(14, 165, 233, 0.28);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #07080d;
+    --foreground: #eef0f6;
+    --card: rgba(20, 22, 32, 0.66);
+    --card-border: rgba(255, 255, 255, 0.09);
+    --muted: #9aa1b1;
+    --field: rgba(255, 255, 255, 0.04);
+    --field-border: rgba(255, 255, 255, 0.12);
+    --glow-a: rgba(99, 102, 241, 0.3);
+    --glow-b: rgba(217, 70, 239, 0.22);
+    --glow-c: rgba(14, 165, 233, 0.22);
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-border: var(--card-border);
+  --color-muted: var(--muted);
+  --color-field: var(--field);
+  --color-field-border: var(--field-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --animate-float-slow: float-slow 18s ease-in-out infinite;
+  --animate-rise: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(0, -3%, 0) scale(1.08);
+    }
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Keep the browser autofill wash from breaking the glass fields. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--foreground);
+  -webkit-box-shadow: 0 0 0 1000px var(--background) inset;
+  caret-color: var(--foreground);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
