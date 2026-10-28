@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { Backdrop } from '../components/Backdrop'
 
@@ -56,15 +55,6 @@ export default function ClockPage() {
             <ClockSkeleton />
           )}
         </div>
-
-        <p className="mt-6 text-center text-xs text-muted">
-          <Link
-            href="/"
-            className="rounded transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-indigo-500"
-          >
-            ← Back to the form
-          </Link>
-        </p>
       </div>
     </main>
   )
